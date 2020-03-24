@@ -5,8 +5,8 @@ import pandas as pd
 
 
 # connect to the API
-client_id = '3812e6dedc9440c09c1fd0fdf1ae5151'
-client_secret = '4f85dee16915458085f06334e1c08ae7'
+client_id = 'Client ID Here'
+client_secret = 'Client Secret Here'
 
 client_credentials_manager = SpotifyClientCredentials(client_id, client_secret)
 
@@ -48,13 +48,13 @@ def getTrackFeatures(id):
       track = [name, album, artist, release_date, length, popularity, danceability, acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, tempo, time_signature]
       return track
 
-#loop over track ids to create dataset
+# loop over track ids
 tracks = []
 for i in range(0,len(ids)):
     time.sleep(.5)
     track = getTrackFeatures(ids[i])
     tracks.append(track)
 
+# create dataset   
 df = pd.DataFrame(tracks, columns = ['name', 'album', 'artist', 'release_date', 'length', 'popularity', 'danceability', 'acousticness', 'danceability', 'energy', 'instrumentalness', 'liveness', 'loudness', 'speechiness', 'tempo', 'time_signature'])
-
 df.to_csv("spotify.csv", sep = ',')
